@@ -1,0 +1,15 @@
+---
+# File:
+
+- name: create the instance for the application
+  ec2:
+    region: "{{ aws_region }}"
+    vpc_id: "{{ random_vpc_id }}"
+    key_name: "{{ key_name }}"
+    image: "{{ image_id }}"
+    instance_type: "{{ instance_type }}"
+    group: "{{ security_group_name }}"
+    wait: yes
+    count: 1
+    instance_tags:
+      Project: "{{ instance_tag_project_name }}"

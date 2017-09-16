@@ -1,0 +1,50 @@
+---
+# File: ansible-deploy.yml
+
+- hosts: 127.0.0.1
+  connection: local
+  roles:
+    - create
+
+
+
+# assumptions: this is a single server we are launching, not on an elb
+
+# create key locally using ssh-keygen - needs to be placed in a specific location before running
+# e.g. ssh-keygen -t rsa -b 4096 -f ~/Source/gits/id_rsa
+# AWS key and secret key id need to be in environment variables and region
+
+# run with ansible 2.3 - latest stable version from pip
+# python > 2.6
+# boto
+
+# vpc and subnet
+
+
+
+
+# TODO:
+#	create key pair (manually - add to documentation)
+#   add aws key id and secret access key to documentation
+#	add public key to ec2
+#   launch instance with key and tag
+#     - set firewall settings for port 80 and 443 and 22
+#     - put on elb if time
+#     - use amazon linux image
+#     - use troposphere if time
+#   find instance by tag
+#   create a deployment user with a key for deployments
+#   shell in as deployment user
+#   run kernel updates
+#   install ruby and ruby gems and bundler
+#   set os firewall rules if necessary
+#   deploy the application:
+#      - install nginx
+#      - configure nginx
+#      - clone rea-sinatra to /var/www
+#      - install bundles
+#      - bundle exec rackup
+#      - link sinatra to nginx
+#      - restart nginx
+#  get public ip address or dns
+#  test site is working - simple curl with assert or selenium if time

@@ -1,0 +1,7 @@
+---
+
+keys_path: "{{ playbook_dir }}/keys"
+key_name: simple_sinatra_app
+keys_pub_file: "{{ keys_path }}/id_rsa.pub"
+image_id: ami-30041c53  # taken from latest Amazon Linux Image v2017.03.1
+instance_type: t2.micro

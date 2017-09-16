@@ -1,0 +1,6 @@
+---
+
+instance_tag_project_name: simple-sinatra-app
+host_group_name: simple-sinatra-app
+security_group_name: simple-sinatra-app
+aws_region: ap-southeast-2

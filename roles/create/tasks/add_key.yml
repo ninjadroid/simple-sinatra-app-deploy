@@ -1,0 +1,9 @@
+---
+# File:
+
+- name: add locally created key to aws key store
+  ec2_key:
+    region: "{{ aws_region }}"
+    name: "{{ key_name }}"
+    key_material: "{{ item }}"
+  with_file: "{{ keys_pub_file }}"

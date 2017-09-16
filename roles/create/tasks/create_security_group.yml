@@ -1,0 +1,19 @@
+---
+# File:
+
+- name: create security group for instance
+  ec2_group:
+    name: "{{ security_group_name }}"
+    description: "security group for {{ instance_tag_project_name }}"
+    vpc_id: "{{ random_vpc_id }}"
+    region: "{{ aws_region }}"
+    purge_rules: yes
+    rules:
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 0.0.0.0/0
