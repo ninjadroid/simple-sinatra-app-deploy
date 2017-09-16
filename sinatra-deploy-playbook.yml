@@ -22,12 +22,9 @@
   roles:
     - { role: stage, become: yes }
     - deploy
+    - test
   vars:
     ansible_ssh_private_key_file: "{{ playbook_dir }}/keys/deployment/id_rsa"
-
-
-
-
 
 # assumptions: this is a single server we are launching, not on an elb
 
@@ -41,16 +38,15 @@
 # python > 2.6
 # boto
 
-# vpc and subnet
-
-
 # TODO: yum update
+
+# nginx config
 
 # ansible-galaxy install rvm_io.ruby
 
 # ansible-galaxy install -r requirements.yml
 
-
+# README.md
 
 # TODO:
 #	create key pair (manually - add to documentation)

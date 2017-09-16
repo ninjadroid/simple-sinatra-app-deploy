@@ -7,4 +7,4 @@ repository_name: https://github.com/rea-cruitment/simple-sinatra-app
 release_branch: "{{ cli_release_path | default('master') }}"
 
 deployment_releases_path: /var/www/releases
-deployment_path: /var/www/deployment
+current_deployment_path: /var/www/deployment

@@ -1,18 +1,23 @@
 ---
 # File:
 
-- ec2_vpc_subnet_facts:
+- name: get vpc facts
+  ec2_vpc_subnet_facts:
     region: "{{ aws_region }}"
   register: subnet_facts
 
-- set_fact:
+- name: get list of vpc_ids
+  set_fact:
     vpc_ids: "{{ subnet_facts.subnets|map(attribute='vpc_id')|list }}"
 
-- set_fact:
+- name: select a random vpc
+  set_fact:
     vpc_id: "{{ vpc_ids | random }}"
 
-- set_fact:
+- name: get list of subnet_ids
+  set_fact:
     subnet_ids: "{{ subnet_facts.subnets|map(attribute='id')|list }}"
 
-- set_fact:
+- name: select a random subnet_id
+  set_fact:
     subnet_id: "{{ subnet_ids | random }}"

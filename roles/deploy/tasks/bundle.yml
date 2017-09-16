@@ -1,0 +1,12 @@
+---
+# File:
+
+- shell: bundle install
+  args:
+    chdir: "{{ deployment_timestamped_release_path }}"
+
+- shell: bundle exec rackup &
+  args:
+    chdir: "{{ deployment_timestamped_release_path }}"
+
+    

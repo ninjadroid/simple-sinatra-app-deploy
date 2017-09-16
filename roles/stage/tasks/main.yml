@@ -13,7 +13,6 @@
     rvm1_install_path: /usr/local/rvm
     rvm1_bundler_install: yes
     rvm1_user: root
-  become: yes
 
 - name: install nginx
   include: nginx.yml

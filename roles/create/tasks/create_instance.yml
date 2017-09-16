@@ -4,8 +4,8 @@
 - name: create the instance for the application
   ec2:
     region: "{{ aws_region }}"
-    vpc_id: "{{ vpc_id }}"
-    key_name: "{{ key_name }}"
+    vpc_subnet_id: "{{ subnet_id }}"
+    key_name: "{{ ec2_user_key_name }}"
     image: "{{ image_id }}"
     instance_type: "{{ instance_type }}"
     group: "{{ security_group_name }}"

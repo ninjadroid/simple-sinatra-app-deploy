@@ -1,0 +1,26 @@
+---
+# File:
+
+- name: set timestamped release path
+  set_fact:
+    deployment_timestamped_release_path: "{{ deployment_releases_path }}/{{ ansible_date_time.year }}{{ ansible_date_time.month }}{{ ansible_date_time.day }}{{ ansible_date_time.hour }}{{ ansible_date_time.minute }}"
+
+- name: create deployment releases path
+  file:
+    path: "{{ deployment_releases_path }}"
+    state: directory
+    owner: deployment
+    group: nginx
+  become: yes
+
+- name: clone repo into timestamped release path
+  git:
+    repo: "{{ repository_name }}"
+    dest: "{{ deployment_timestamped_release_path }}"
+    version: "{{ release_branch }}"
+
+- name: soft-link timestamped release path to current deployment path
+  file:
+    src: "{{ deployment_timestamped_release_path }}"
+    dest: "{{ current_deployment_path }}"
+    state: link

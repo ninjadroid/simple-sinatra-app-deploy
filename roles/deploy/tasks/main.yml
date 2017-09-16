@@ -1,2 +1,6 @@
 ---
 # File:
+
+- include: deploy.yml
+
+- include: bundle.yml
