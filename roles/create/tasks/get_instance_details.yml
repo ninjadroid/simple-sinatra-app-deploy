@@ -10,9 +10,6 @@
       "instance-state-name": pending
   register: matching_instances
 
-- set_fact:
-    instance_count: "{{ matching_instances.instances|length }}"
-
 - name: check if instance is in running state and get details
   ec2_remote_facts:
     region: "{{ aws_region }}"
@@ -20,8 +17,15 @@
       "tag:Project": "{{ instance_tag_project_name }}"
       "instance-state-name": running
   register: matching_instances
-  when: instance_count|int == 0
+  when: matching_instances.instances|length == 0
 
 - set_fact:
-    instance_count: "{{ matching_instances.instances|length }}"
-  when: instance_count|int == 0
+    instance_present: "{{ matching_instances.instances|length > 0 }}"
+
+- debug:
+    var: instance_present
+
+- set_fact:
+    vpc_id: "{{ (matching_instances.instances|first).vpc_id }}"
+    instance_id: "{{ (matching_instances.instances|first).id }}"
+  when: instance_present

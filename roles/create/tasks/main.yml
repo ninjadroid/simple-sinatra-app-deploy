@@ -1,30 +1,19 @@
 ---
 # File:
 
-- include: get_random_vpc_id.yml
-
 - include: add_key.yml
+
+- include: get_instance_details.yml
+
+- include: get_random_subnet.yml
 
 - include: create_security_group.yml
 
-- include: get_instance_details.yml
-
 - include: create_instance.yml
-  when: instance_count == 0
+  when: not instance_present
 
 - include: get_instance_details.yml
 
-- name: add instance to host group
-  add_host:
-    hostname: "{{ item.public_ip_address }}"
-    groupname: "{{ host_group_name }}"
-  with_items: "{{ matching_instances.instances }}"
+- include: add_to_hosts_group.yml
 
-- name: wait for ssh port to become available
-  wait_for:
-    host: "{{ item.public_dns_name }}"
-    port: 22
-    delay: 30
-    timeout: 120
-    state: started
-  with_items: "{{ matching_instances.instances }}"
+- include: wait_for_ssh.yml

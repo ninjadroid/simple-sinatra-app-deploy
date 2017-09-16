@@ -6,6 +6,13 @@
   roles:
     - create
 
+# - hosts: "{{ host_group_name }}"
+#   become: yes
+#   roles:
+#     - stage
+#     - deploy
+#   vars:
+#     ansible_ssh_private_key_file: "{{ playbook_dir }}/keys/id_rsa"
 
 
 # assumptions: this is a single server we are launching, not on an elb
@@ -13,6 +20,9 @@
 # create key locally using ssh-keygen - needs to be placed in a specific location before running
 # e.g. ssh-keygen -t rsa -b 4096 -f ~/Source/gits/id_rsa
 # AWS key and secret key id need to be in environment variables and region
+
+# prerequisites:
+# aws cli installed locally with ~/.aws/credentials and config set up with key and secret id
 
 # run with ansible 2.3 - latest stable version from pip
 # python > 2.6
