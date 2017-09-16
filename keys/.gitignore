@@ -1,3 +1,0 @@
-# ignore all files (keys) except gitignore
-*
-!.gitignore

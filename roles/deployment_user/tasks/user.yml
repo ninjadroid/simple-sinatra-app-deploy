@@ -1,0 +1,27 @@
+---
+# File:
+
+- name: create group for deployment user
+  group:
+    name: deployment
+    state: present
+
+- name: create group for nginx user
+  group:
+    name: nginx
+    state: present
+
+- name: create deployment user
+  user:
+    name: deployment
+    comment: "Deployment-specific user"
+    group: deployment
+    groups: nginx
+
+- name: create path for deployment user keys
+  file:
+    path: "{{ deployment_user_ssh_path }}"
+    owner: deployment
+    group: deployment
+    state: directory
+    mode: 0700

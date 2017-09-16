@@ -4,5 +4,5 @@
 - name: add instance to host group
   add_host:
     hostname: "{{ item.public_ip_address }}"
-    groupname: "{{ host_group_name }}"
+    groupname: app_host_group
   with_items: "{{ matching_instances.instances }}"

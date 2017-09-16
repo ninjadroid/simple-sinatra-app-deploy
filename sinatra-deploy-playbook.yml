@@ -1,18 +1,32 @@
 ---
 # File: ansible-deploy.yml
 
-- hosts: 127.0.0.1
+- name: create ec2 instance
+  hosts: 127.0.0.1
   connection: local
   roles:
     - create
 
-# - hosts: "{{ host_group_name }}"
-#   become: yes
-#   roles:
-#     - stage
-#     - deploy
-#   vars:
-#     ansible_ssh_private_key_file: "{{ playbook_dir }}/keys/id_rsa"
+- name: create deployment user on instance
+  hosts: app_host_group
+  remote_user: ec2-user
+  become: yes
+  roles:
+    - deployment_user
+  vars:
+    ansible_ssh_private_key_file: "{{ playbook_dir }}/keys/ec2-user/id_rsa"
+
+- name: stage and deploy environment as deployment user
+  hosts: app_host_group
+  remote_user: deployment
+  roles:
+    - { role: stage, become: yes }
+    - deploy
+  vars:
+    ansible_ssh_private_key_file: "{{ playbook_dir }}/keys/deployment/id_rsa"
+
+
+
 
 
 # assumptions: this is a single server we are launching, not on an elb
@@ -20,9 +34,8 @@
 # create key locally using ssh-keygen - needs to be placed in a specific location before running
 # e.g. ssh-keygen -t rsa -b 4096 -f ~/Source/gits/id_rsa
 # AWS key and secret key id need to be in environment variables and region
-
+# all keys must have permissions 0600
 # prerequisites:
-# aws cli installed locally with ~/.aws/credentials and config set up with key and secret id
 
 # run with ansible 2.3 - latest stable version from pip
 # python > 2.6
@@ -30,6 +43,12 @@
 
 # vpc and subnet
 
+
+# TODO: yum update
+
+# ansible-galaxy install rvm_io.ruby
+
+# ansible-galaxy install -r requirements.yml
 
 
 

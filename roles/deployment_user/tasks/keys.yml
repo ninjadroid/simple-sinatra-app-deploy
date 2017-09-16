@@ -1,0 +1,26 @@
+---
+# File:
+
+- name: copy public key to deployment ssh path for authorized keys
+  copy:
+    src: "{{ deployment_user_public_key_path }}"
+    dest: "{{ deployment_user_ssh_path }}/authorized_keys"
+    owner: deployment
+    group: deployment
+    mode: 0600
+
+- name: copy public key to deployment ssh folder
+  copy:
+    src: "{{ deployment_user_public_key_path }}"
+    dest: "{{ deployment_user_ssh_path }}/id_rsa.pub"
+    owner: deployment
+    group: deployment
+    mode: 0600
+
+- name: copy private key to deployment ssh folder
+  copy:
+    src: "{{ deployment_user_private_key_path }}"
+    dest: "{{ deployment_user_ssh_path }}/id_rsa"
+    owner: deployment
+    group: deployment
+    mode: 0600

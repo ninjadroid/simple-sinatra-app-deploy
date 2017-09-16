@@ -1,13 +1,13 @@
 ---
 # File:
 
-- include: add_key.yml
-
-- include: get_instance_details.yml
-
 - include: get_random_subnet.yml
 
+- include: add_key.yml
+
 - include: create_security_group.yml
+
+- include: get_instance_details.yml
 
 - include: create_instance.yml
   when: not instance_present

@@ -1,0 +1,8 @@
+---
+# File:
+
+- name: install ansible galaxy prerequisites
+  command: ansible-galaxy install -r requirements.yml
+  args:
+    chdir: "{{ playbook_dir }}"
+    executable: /bin/bash

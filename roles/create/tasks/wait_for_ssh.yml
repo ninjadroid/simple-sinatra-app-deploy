@@ -5,7 +5,7 @@
   wait_for:
     host: "{{ item.public_dns_name }}"
     port: 22
-    delay: 10
+    delay: 5
     timeout: 120
     state: started
   with_items: "{{ matching_instances.instances }}"

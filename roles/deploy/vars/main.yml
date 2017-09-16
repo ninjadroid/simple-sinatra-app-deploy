@@ -1,0 +1,10 @@
+---
+# File:
+
+repository_name: https://github.com/rea-cruitment/simple-sinatra-app
+
+# can specify the release branch from the command line as an extra argument otherwise defaults to 'master'
+release_branch: "{{ cli_release_path | default('master') }}"
+
+deployment_releases_path: /var/www/releases
+deployment_path: /var/www/deployment

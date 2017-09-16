@@ -1,0 +1,7 @@
+---
+# File:
+
+# Install with: `ansible-galaxy install -r requirements.yml`
+
+- name: ruby rvm package
+  name: rvm_io.ruby

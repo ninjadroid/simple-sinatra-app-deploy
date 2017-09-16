@@ -1,0 +1,10 @@
+---
+# File:
+
+- name: add line to sudoers file for deployment user
+  lineinfile:
+    dest: /etc/sudoers.d/deployment
+    state: present
+    regexp: '^%deployment'
+    line: '%deployment ALL=(ALL) NOPASSWD: ALL'
+    create: yes

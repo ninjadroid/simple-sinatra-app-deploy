@@ -20,12 +20,8 @@
   when: matching_instances.instances|length == 0
 
 - set_fact:
-    instance_present: "{{ matching_instances.instances|length > 0 }}"
-
-- debug:
-    var: instance_present
+    instance_present: matching_instances.instances|length > 0
 
 - set_fact:
     vpc_id: "{{ (matching_instances.instances|first).vpc_id }}"
-    instance_id: "{{ (matching_instances.instances|first).id }}"
   when: instance_present

@@ -1,5 +1,7 @@
 ---
+# File:
 
+keys_path: "{{ playbook_dir }}/keys"
 instance_tag_project_name: simple-sinatra-app
 host_group_name: simple-sinatra-app
 security_group_name: simple-sinatra-app

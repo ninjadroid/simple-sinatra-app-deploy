@@ -1,0 +1,8 @@
+---
+# File:
+
+deployment_user_keys_path: "{{ keys_path }}/deployment"
+deployment_user_public_key_path: "{{ deployment_user_keys_path }}/id_rsa.pub"
+deployment_user_private_key_path: "{{ deployment_user_keys_path }}/id_rsa"
+deployment_user_home_path: "/home/deployment"
+deployment_user_ssh_path: "{{ deployment_user_home_path }}/.ssh"
