@@ -2,23 +2,30 @@
 # File:
 
 - name: get localhost port 80 content
-  shell: curl localhost
+  uri:
+    url: http://localhost
+    return_content: yes
   register: localhost_out
+
+- debug:
+    var: localhost_out
 
 - name: get the pusblic ip address of the web server
   set_fact:
     target_host_public_ip: "{{ groups.app_host_group|first }}"
 
 - name: get external ip port 80 content
-  shell: "curl {{ target_host_public_ip }}"
+  uri:
+    url: "http://{{ target_host_public_ip }}"
+    return_content: yes
   register: external_ip_out
 
 - name: assert that output is correct from external ip and localhost
   assert:
     that:
-      - "localhost_out.stdout == '{{ expected_output }}'"
-      - "external_ip_out.stdout == '{{ expected_output }}'"
+      - "localhost_out.content == '{{ expected_output }}'"
+      - "external_ip_out.content == '{{ expected_output }}'"
 
 - name: output message of web server ip address
   debug:
-    msg: "The web server {{ server_application_name }} is now running on ip address {{ target_host_public_ip }} "
+    msg: "The web server {{ server_application_name }} is now running on ip address {{ target_host_public_ip }}"
