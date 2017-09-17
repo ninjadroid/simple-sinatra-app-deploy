@@ -1,11 +1,16 @@
 # simple-sinatra-app-deploy
-App for deploying a simple Sinatra app
+
+This is an example application for preparing an environment for and deploying the simple-sinatra-app. The source code that is deployed is
+available at https://github.com/rea-cruitment/simple-sinatra-app
+
+This application deploys a basic Ruby Sinatra web application using Ansible for configuration management and AWS for cloud hosting.
 
 # Prerequisites
 
 On the computer the playbook is run from, the following must be present:
 
-  - Operating system must be of a Linux variety.
+  - Your local operating system must be of the Linux variety.
+  - An Amazon Web Services Account. A free tier account can be created [here.](https://aws.amazon.com/free/)
   - Ansible 2.3 must be installed. Further instructions on installing Ansible can be found on the [Ansible website](http://docs.ansible.com/ansible/latest/intro_installation.html)
   - Python 2.6 or higher must be installed.
 
@@ -13,20 +18,18 @@ On the computer the playbook is run from, the following must be present:
 
 ## Generating key pairs
 
-After cloning this repository, a public and private key for the ec2-user and deployment users must be generated and copied into the ./keys/ec2-user
-and ./keys/deployment paths respectively.
+After cloning this repository, a public and private key for the `ec2-user` and `deployment` users must be generated and copied into the ``./keys/ec2-user`
+and ``./keys/deployment` paths respectively.
 
-Keys can be generated from the command line using ssh-keygen:
+Keys can be generated from the command line using ssh-keygen. e.g.
 
-e.g.
 ```
   ssh-keygen -t rsa -b 4096 -f ~/simple-sinatra-app-deploy/keys/ec2-user/id_rsa
   ssh-keygen -t rsa -b 4096 -f ~/simple-sinatra-app-deploy/keys/deployment/id_rsa
 ```
 
-All keys must have permissions 0600. This can be achieved by using the chmod command:
+All keys must have permissions 0600. This can be achieved by using the chmod command. e.g.
 
-e.g.
 ```
   sudo chmod 0600 ~/simple-sinatra-app-deploy/keys/ec2-user/*
   sudo chmod 0600 ~/simple-sinatra-app-deploy/keys/ec2-user/*
@@ -34,11 +37,11 @@ e.g.
 
 ## AWS Authentication
 
-In order to run commands from Ansible on your AWS account, your AWS Access Key and AWS Secret Access Key must be known to Ansible.
-This can be done as environment variables or as part of the AWS CLI credentials.
+In order to run commands from Ansible on your AWS account, your **AWS Access Key** and **AWS Secret Access Key** must be known to Ansible.
+This can be done as local environment variables or as part of the AWS CLI credentials.
 Further details on configuring AWS for Ansible can be found on the [Ansible website](http://docs.ansible.com/ansible/latest/guide_aws.html)
 
-## Galaxy requirements
+## Galaxy Requirements
 
 Before running the playbook, the prerequisite Ansible Galaxy role for rvm must be installed.
 
@@ -47,7 +50,7 @@ From the base path of the repo, run the command:
   ansible-galaxy install -r requirements.yml
 ```
 
-# Running the playbook:
+# Running the Playbook:
 
 To run the playbook, from the base path of the repository, run the command:
 
@@ -56,6 +59,31 @@ ansible-playbook sinatra-deploy-playbook.yml
 ```
 
 It may take upwards of 10 minutes to run and should not error.
+
+# Expected Output:
+
+Upon successful completion of the playbook, you should see results similar to the following:
+
+```
+TASK [test : assert that output is correct from external ip and localhost] *******************************************************************************************************************************************************************
+ok: [54.153.210.34] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+
+TASK [test : output message of web server ip address] ****************************************************************************************************************************************************************************************
+ok: [54.153.210.34] => {
+    "msg": "The web server simple-sinatra-app is now running on ip address 54.153.210.34 "
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+127.0.0.1                  : ok=18   changed=1    unreachable=0    failed=0
+54.153.210.34              : ok=37   changed=7    unreachable=0    failed=0
+```
+
+You should also be able to browse to the ip address specified and see the resultant 'Hello World!' message.
+Additionally, you will have a t2.micro AWS instance running in your AWS console.
+You should terminate this instance to prevent unnecessary charges once completed testing.
 
 # Overview of playbook process
 
@@ -71,7 +99,7 @@ It may take upwards of 10 minutes to run and should not error.
 
 # Additional notes:
 
-Possible improvements could include:
+## Possible improvements could include:
 
 Placing the instance behind a load balancer for scalability.
 Removing older timestamped deploys.
