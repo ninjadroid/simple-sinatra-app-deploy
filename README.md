@@ -46,9 +46,6 @@ This deployment approach is not fully idempotent but has been done for the afore
 
 Cloning the application repository is done using https instead of ssh as it is assumed the deployment user's key is not from a user on Github.
 
-Getting the ip address of the target host and using it through the playbook has been done as a matter of simplicity.
-This could be modified to get the ip address based on the instances 'Project' tag for greater flexibility in calling roles via the playbook.
-
 Testing of the website is done via a simple curl-type request. On a production system, this would be done using an application such as Selenium or PhantomJS for greater coverage.
 
 For further scalability and cost considerations, AWS Lambda could be used but would require completely re-architecting both the deployment and application solutions.
@@ -129,13 +126,3 @@ PLAY RECAP *********************************************************************
 You should also be able to browse to the ip address specified and see the resultant 'Hello World!' message.
 Additionally, you will have a `t2.micro` AWS instance running in your AWS console.
 You should terminate this instance to prevent unnecessary charges once testing is completed.
-
-# Additional Notes:
-
-## Possible Improvements:
-
- - Placing the instance behind a load balancer for scalability.
- - Removing older timestamped deploys.
- - Getting ip address by tag instead of ip address - this would allow for more flexible playbooks.
- - Split playbooks into separate create, deploy and test playbooks.
- - Adding a role to destroy the instance.
