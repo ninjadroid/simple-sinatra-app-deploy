@@ -37,7 +37,7 @@ In terms of security, the following considerations have been made:
   - Updating all installed applications to allow for the latest security patches to be applied.
   - Only ports 80 and 22 are open via AWS security groups for the web application and SSH access for Ansible respectively.
   - A deployment user has been implemented for deployments, running Nginx and SSH connection via Ansible.
-  - WEBRick is proxied to port 80 via Nginx to allow for a more secure and robust web server implementation.
+  - WEBrick is proxied to port 80 via Nginx to allow for a more secure and robust web server implementation.
 
 Using timestamped deploys has been implemented to allow for rollback and traceability of deployments.
 This deployment approach is not fully idempotent but has been done for the aforementioned benefits.
@@ -97,7 +97,7 @@ From the base path of the repo, run the command:
 To run the playbook, from the base path of the repository, run the command:
 
 ```
-ansible-playbook sinatra-deploy-playbook.yml
+  ansible-playbook sinatra-deploy-playbook.yml
 ```
 
 It may take upwards of 10 minutes to run the playbook and it should not error.
