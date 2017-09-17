@@ -25,6 +25,7 @@ On the computer the playbook is run from, the following must be present:
   - The application uses the latest public Amazon Linux image (ami-30041c53). This can be changed in the varaiable `image_id` in the file `./roles/create/vars/main.yml`
   - Ansible 2.3 must be installed. Further instructions on installing Ansible can be found on the [Ansible website](http://docs.ansible.com/ansible/latest/intro_installation.html)
   - Python 2.6 or higher must be installed.
+  - The Python `boto` package must be installed. If `pip` is installed, this can be installed by running `pip install boto`. Further instructions on installing `boto` can be found [here](http://boto.cloudhackers.com/en/latest/getting_started.html)
 
 # Assumptions and Design Choice:
 
