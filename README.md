@@ -1,11 +1,25 @@
 # simple-sinatra-app-deploy
 
-This is an example application for preparing an environment for and deploying the simple-sinatra-app. The source code that is deployed is
-available at https://github.com/rea-cruitment/simple-sinatra-app
+This is an example application for preparing an environment for and deploying the simple-sinatra-app.
 
-This application deploys a basic Ruby Sinatra web application using Ansible for configuration management and AWS for cloud hosting.
+The source code that is deployed is available at https://github.com/rea-cruitment/simple-sinatra-app
 
-# Prerequisites
+This application deploys a basic Ruby Sinatra Web Application using Ansible for Configuration Management and AWS for Cloud Hosting.
+
+# Overview of Playbook Process:
+
+ - Add the ec2-user key to AWS
+ - Create the target host instance with the relevant ports open
+ - Create a deployment user on the target host
+ - Login to the target host as the deployment user and:
+   - Install prerequisite packages (git, rvm, nginx)
+   - Configure Nginx
+   - Clone the repository in a timestamped path and link as the current deployment
+   - Start the bundler for the repository and keep running in the background
+ - Test the site is up from localhost and the external ip of the target host
+
+
+# Prerequisites:
 
 On the computer the playbook is run from, the following must be present:
 
@@ -14,14 +28,14 @@ On the computer the playbook is run from, the following must be present:
   - Ansible 2.3 must be installed. Further instructions on installing Ansible can be found on the [Ansible website](http://docs.ansible.com/ansible/latest/intro_installation.html)
   - Python 2.6 or higher must be installed.
 
-# Preparing to run the playbook
+# Preparing to Run the Playbook:
 
-## Generating key pairs
+## Generating Key Pairs
 
 After cloning this repository, a public and private key for the `ec2-user` and `deployment` users must be generated and copied into the `./keys/ec2-user`
 and `./keys/deployment` paths respectively.
 
-Keys can be generated from the command line using ssh-keygen. e.g.
+Keys can be generated from the command line using `ssh-keygen`. e.g.
 
 ```
   ssh-keygen -t rsa -b 4096 -f ~/simple-sinatra-app-deploy/keys/ec2-user/id_rsa
@@ -32,7 +46,7 @@ All keys must have permissions 0600. This can be achieved by using the chmod com
 
 ```
   sudo chmod 0600 ~/simple-sinatra-app-deploy/keys/ec2-user/*
-  sudo chmod 0600 ~/simple-sinatra-app-deploy/keys/ec2-user/*
+  sudo chmod 0600 ~/simple-sinatra-app-deploy/keys/deployment/*
 ```
 
 ## AWS Authentication
@@ -85,24 +99,12 @@ You should also be able to browse to the ip address specified and see the result
 Additionally, you will have a t2.micro AWS instance running in your AWS console.
 You should terminate this instance to prevent unnecessary charges once completed testing.
 
-# Overview of playbook process
+# Additional Notes:
 
- - Add the ec2-user key to AWS
- - Create the target host instance with the relevant ports open
- - Create a deployment user on the target host
- - Login to the target host as the deployment user and:
-   - Install prerequisite packages (git, rvm, nginx)
-   - Configure Nginx
-   - Clone the repository in a timestamped path and link as the current deployment
-   - Start the bundler for the repository and keep running in the background
- - Test the site is up from localhost and the external ip of the target host
+## Possible Improvements:
 
-# Additional notes:
-
-## Possible improvements could include:
-
-Placing the instance behind a load balancer for scalability.
-Removing older timestamped deploys.
-Getting ip address by tag instead of ip address - this would allow for more flexible playbooks.
-Split playbooks into separate create, deploy and test playbooks.
-Adding a role to destroy the instance.
+ - Placing the instance behind a load balancer for scalability.
+ - Removing older timestamped deploys.
+ - Getting ip address by tag instead of ip address - this would allow for more flexible playbooks.
+ - Split playbooks into separate create, deploy and test playbooks.
+ - Adding a role to destroy the instance.
