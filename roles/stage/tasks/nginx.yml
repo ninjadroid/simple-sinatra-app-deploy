@@ -5,11 +5,20 @@
   package:
     name: nginx
 
-# set config for nginx
-
 - name: start nginx
   service:
     name: nginx
     enabled: yes
     state: started
   become: yes
+
+# - name:
+#   copy:
+#     src: nginx.conf
+#     dest: /etc/nginx/nginx.conf
+#     force: yes
+
+- name: copy application template to /conf.d
+  template:
+    src: application.conf.j2
+    dest: /etc/nginx/conf.d/{{ server_application_name }}conf

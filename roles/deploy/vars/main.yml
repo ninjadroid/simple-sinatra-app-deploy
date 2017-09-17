@@ -8,3 +8,5 @@ release_branch: "{{ cli_release_path | default('master') }}"
 
 deployment_releases_path: /var/www/releases
 current_deployment_path: /var/www/deployment
+
+source_profile_command: ". ~/.bash_profile "

@@ -1,12 +1,20 @@
 ---
 # File:
 
-- shell: bundle install
+- name: install bundle
+  shell: "{{ source_profile_command }} && bundle install"
   args:
     chdir: "{{ deployment_timestamped_release_path }}"
+    executable: /bin/bash
 
-- shell: bundle exec rackup &
+- name: start WEBrick
+  shell: "{{ source_profile_command }}  && bundle exec rackup -p {{ application_port }} &"
   args:
     chdir: "{{ deployment_timestamped_release_path }}"
+    executable: /bin/bash
 
-    
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
+  become: yes
