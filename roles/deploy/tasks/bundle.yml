@@ -8,7 +8,7 @@
     executable: /bin/bash
 
 - name: start WEBrick
-  shell: "{{ source_profile_command }}  && bundle exec rackup -p {{ application_port }} &"
+  shell: "{{ source_profile_command }} && nohup bundle exec rackup -p {{ application_port }} &"
   args:
     chdir: "{{ deployment_timestamped_release_path }}"
     executable: /bin/bash

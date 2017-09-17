@@ -16,3 +16,9 @@
 - name: install nginx
   include: nginx.yml
   become: yes
+
+- name: upgrade all packages on the instance
+  yum:
+    name: '*'
+    state: latest
+  become: yes
