@@ -7,9 +7,6 @@
     return_content: yes
   register: localhost_out
 
-- debug:
-    var: localhost_out
-
 - name: get the pusblic ip address of the web server
   set_fact:
     target_host_public_ip: "{{ groups.app_host_group|first }}"
