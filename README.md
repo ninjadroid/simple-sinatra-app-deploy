@@ -50,7 +50,7 @@ Testing of the website is done via a simple curl-type request. On a production s
 
 For further scalability and cost considerations, AWS Lambda could be used but would require completely re-architecting both the deployment and application solutions.
 
-Using Ansible Galaxy for installing the RVM has been used to simplify the Ruby installation process.
+Using Ansible Galaxy for installing the RVM has been used to simplify the Ruby installation process. Ruby version 2.3.1 has been used to meet the minimum version requirement for Sinatra of version 2.2.0.
 
 The stage role could be more fine-grained and split into separate roles for packages and nginx but as this is a once-use deployment solution without any reuse, there is little need. Likewise, the create role could be split further but is unnecessary with the current requirements.
 
