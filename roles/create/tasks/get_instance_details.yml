@@ -1,7 +1,6 @@
 ---
 # File:
 
-# would use ec2_instance_facts if Ansbible 2.4 +
 - name: check if instance is in pending state and get details
   ec2_remote_facts:
     region: "{{ aws_region }}"
@@ -19,10 +18,12 @@
   register: matching_instances
   when: matching_instances.instances|length == 0
 
-- set_fact:
+- name: set a variable to determine if instance is running
+  set_fact:
     instance_present: "{{ matching_instances.instances|length > 0 }}"
 
-- set_fact:
+- name: set variables for the specified vpc_id and subnet_id
+  set_fact:
     vpc_id: "{{ (matching_instances.instances|first).vpc_id }}"
     subnet_id: "{{ (matching_instances.instances|first).id }}"
   when: instance_present

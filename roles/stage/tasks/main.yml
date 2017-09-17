@@ -13,7 +13,7 @@
     rvm1_bundler_install: yes
     rvm1_user: deployment
 
-- name: install nginx
+- name: install and configure nginx
   include: nginx.yml
   become: yes
 

@@ -12,13 +12,13 @@
     state: started
   become: yes
 
-- name:
+- name: replace existing nginx.conf to allow the application web server to be on port 80
   copy:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
     force: yes
 
-- name: copy application template to /conf.d
+- name: copy application template to /conf.d for proxying port {{ application_port }} with port 80
   template:
     src: application.conf.j2
     dest: /etc/nginx/conf.d/{{ server_application_name }}.conf

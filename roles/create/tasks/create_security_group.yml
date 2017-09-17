@@ -1,7 +1,7 @@
 ---
 # File:
 
-- name: create security group for instance
+- name: create security group for instance and allow port 80 and 22
   ec2_group:
     name: "{{ security_group_name }}"
     description: "security group for {{ instance_tag_project_name }}"

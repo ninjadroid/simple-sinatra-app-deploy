@@ -1,7 +1,7 @@
 ---
 # File:
 
-- name: add instance to host group
+- name: add instance to Ansible host group
   add_host:
     hostname: "{{ item.public_ip_address }}"
     groupname: app_host_group

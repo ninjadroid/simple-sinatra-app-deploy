@@ -5,7 +5,8 @@
   shell: curl localhost
   register: localhost_out
 
-- set_fact:
+- name: get the pusblic ip address of the web server
+  set_fact:
     target_host_public_ip: "{{ groups.app_host_group|first }}"
 
 - name: get external ip port 80 content
