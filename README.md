@@ -18,8 +18,8 @@ On the computer the playbook is run from, the following must be present:
 
 ## Generating key pairs
 
-After cloning this repository, a public and private key for the `ec2-user` and `deployment` users must be generated and copied into the ``./keys/ec2-user`
-and ``./keys/deployment` paths respectively.
+After cloning this repository, a public and private key for the `ec2-user` and `deployment` users must be generated and copied into the `./keys/ec2-user`
+and `./keys/deployment` paths respectively.
 
 Keys can be generated from the command line using ssh-keygen. e.g.
 
