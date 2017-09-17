@@ -22,7 +22,7 @@ On the computer the playbook is run from, the following must be present:
 
   - Your local operating system must be of the Linux variety, e.g. MacOS, Ubuntu, Centos, etc.
   - An Amazon Web Services Account is required. A free tier account can be created [here.](https://aws.amazon.com/free/)
-  - The application uses the latest Amazon Linux image (ami-30041c53). This can be changed in the varaiable `image_id` in the file `./roles/create/vars/main.yml`
+  - The application uses the latest public Amazon Linux image (ami-30041c53). This can be changed in the varaiable `image_id` in the file `./roles/create/vars/main.yml`
   - Ansible 2.3 must be installed. Further instructions on installing Ansible can be found on the [Ansible website](http://docs.ansible.com/ansible/latest/intro_installation.html)
   - Python 2.6 or higher must be installed.
 
@@ -44,11 +44,11 @@ This deployment approach is not fully idempotent but has been done for the afore
 
 Cloning the application repository is done using https instead of SSH as it is assumed the deployment user's key is not from a user on Github.
 
-Testing of the website is done via a simple curl-type request. On a production system, this would be done using an application such as Selenium or PhantomJS for greater coverage.
+Testing of the website is done via a simple curl-like request. On a production system, this would be done using an application such as Selenium or PhantomJS for greater coverage.
 
 For further scalability and cost considerations, AWS Lambda could be used but would require completely re-architecting both the deployment and application solutions.
 
-Using Ansible Galaxy for installing the RVM has been used to simplify the Ruby installation process. Ruby version 2.3.1 has been used to meet the minimum version requirement for Sinatra of version 2.2.0.
+Using Ansible Galaxy for installing the RVM has been chosen to simplify the Ruby installation process. Ruby version 2.3.1 has been used to meet the minimum version requirement for Sinatra of version 2.2.0.
 
 The stage role could be more fine-grained and split into separate roles for packages and Nginx but as this is a once-use deployment solution without any reuse, there is little need. Likewise, the create role could be split further but is unnecessary with the current requirements.
 
