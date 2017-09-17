@@ -96,8 +96,8 @@ PLAY RECAP *********************************************************************
 ```
 
 You should also be able to browse to the ip address specified and see the resultant 'Hello World!' message.
-Additionally, you will have a t2.micro AWS instance running in your AWS console.
-You should terminate this instance to prevent unnecessary charges once completed testing.
+Additionally, you will have a `t2.micro` AWS instance running in your AWS console.
+You should terminate this instance to prevent unnecessary charges once testing is completed.
 
 # Additional Notes:
 
