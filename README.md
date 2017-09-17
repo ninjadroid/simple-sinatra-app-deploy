@@ -15,9 +15,8 @@ This application deploys a basic Ruby Sinatra Web Application using Ansible for 
    - Install prerequisite packages (git, rvm, nginx)
    - Configure Nginx
    - Clone the repository in a timestamped path and link as the current deployment
-   - Start the bundler for the repository and keep running in the background
+   - Start WEBRick for the application and keep running in the background
  - Test the site is up from localhost and the external ip of the target host
-
 
 # Prerequisites:
 
