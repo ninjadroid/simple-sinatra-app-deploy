@@ -52,6 +52,8 @@ Using Ansible Galaxy for installing the RVM has been used to simplify the Ruby i
 
 The stage role could be more fine-grained and split into separate roles for packages and Nginx but as this is a once-use deployment solution without any reuse, there is little need. Likewise, the create role could be split further but is unnecessary with the current requirements.
 
+A different release branch can be specified as an Ansible command-line extra parameter `cli_release_branch`. e.g. `ansible-playbook ... -e cli_release_branch=test` This defaults to the master branch if not otherwise specified.
+
 # Preparing to Run the Playbook:
 
 ## Generating Key Pairs
